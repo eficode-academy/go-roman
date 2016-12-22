@@ -32,6 +32,10 @@ echo "testing_cid=$testing_cid" >> props.env
 cip=$(sudo docker inspect --format '{{ .NetworkSettings.IPAddress }}' ${testing_cid})
 sudo docker run --rm rufus/siege-engine  -b -t60S http://$cip:8000/ > output 2>&1
 
+# Exit the test service
+sudo docker kill ${testing_cid}
+sudo docker rm ${testing_cid}
+
 # Check service availability
 echo Checking service availability...
 avail=$(cat output | grep Availability | awk '{print $2}')
