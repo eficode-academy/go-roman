@@ -16,6 +16,8 @@ static def configureGit(def job, def repositoryUrl, def branchDef) {
     }
 }
 
+
+
 static def configureEnv(def job, def username) {
     job.with {
         properties {
